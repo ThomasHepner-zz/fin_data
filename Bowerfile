@@ -1,0 +1,4 @@
+asset 'bootstrap-sass'
+asset 'jQuery'
+asset 'flat-ui'
+asset 'jquery-ui'

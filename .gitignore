@@ -75,3 +75,5 @@ bower.json
 .byebug_history
 
 # End of https://www.gitignore.io/api/osx,rails
+
+vendor/assets/bower_components
