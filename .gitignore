@@ -75,5 +75,3 @@ bower.json
 .byebug_history
 
 # End of https://www.gitignore.io/api/osx,rails
-
-/config/database.yml
