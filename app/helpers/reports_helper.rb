@@ -4,8 +4,8 @@ module ReportsHelper
 	end
 
 	def uf_uri(date_from, date_to)
-		date_from = Date.strptime(date_from, "%d/%m/%Y")
-		date_to = Date.strptime(date_to, "%d/%m/%Y")
+		date_from = Date.strptime(date_from, "%m/%d/%Y")
+		date_to = Date.strptime(date_to, "%m/%d/%Y")
 		uri = build_sbif_uri('uf')
 		uri << "/#{date_from.year}/#{date_from.month}/#{date_to.year}/#{date_to.month}"
 		uri << format_and_key
