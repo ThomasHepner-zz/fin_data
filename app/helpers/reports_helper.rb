@@ -4,10 +4,19 @@ module ReportsHelper
 	end
 
 	def uf_uri(date_from, date_to)
-		date_from = Date.strptime(date_from, "%m/%d/%Y")
-		date_to = Date.strptime(date_to, "%m/%d/%Y")
+		date_from = date_from.split('/')
+		date_to = date_to.split('/')
 		uri = build_sbif_uri('uf')
-		uri << "/#{date_from.year}/#{date_from.month}/#{date_to.year}/#{date_to.month}"
+		uri << "/#{date_from[2]}/#{date_from[0]}/#{date_to[2]}/#{date_to[0]}"
+		uri << format_and_key
+		uri
+	end
+
+	def usd_uri(date_from, date_to)
+		date_from = date_from.split('/')
+		date_to = date_to.split('/')
+		uri = build_sbif_uri('dolar')
+		uri << "/#{date_from[2]}/#{date_from[0]}/#{date_from[1]}/#{date_to[2]}/#{date_to[0]}/#{date_to[1]}"
 		uri << format_and_key
 		uri
 	end

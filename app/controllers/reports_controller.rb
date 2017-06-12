@@ -13,8 +13,12 @@ class ReportsController < ApplicationController
              elsif (params[:data_type] == '2')
                 usd_value_lookup(params[:date_from], params[:date_to])
              end
-    # TODO: save report in database
-    # TODO: render response in js
+    if @response.length > 0
+      # TODO: save in database
+      render 'remote_lookup'
+    else
+      render 'error'
+    end
   end
 
   private
