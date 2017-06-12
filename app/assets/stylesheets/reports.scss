@@ -1,13 +1,19 @@
-path { 
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
+.resultsGraph {
+	font-size: 10px;
 }
-
 .axis path,
 .axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }
