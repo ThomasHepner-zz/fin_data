@@ -1,6 +1,6 @@
 var init = function() {
-	$('#date-from').datepicker();
-	$('#date-to').datepicker();
+	$('#date_from').datepicker();
+	$('#date_to').datepicker();
 };
 
 init();

@@ -7,11 +7,11 @@
 			</div>
 			<div class="col-xs-3">
 				<span>From: </span>
-				<input type="text" id="date-from">
+				<%= text_field_tag 'date_from', nil, placeholder: 'Enter beginning date' %>
 			</div>
 			<div class="col-xs-3">
 				<span>To: </span>
-				<input type="text" id="date-to">
+				<%= text_field_tag 'date_to', nil, placeholder: 'Enter ending date' %>
 			</div>
 		</div>
 	</div>
@@ -19,5 +19,6 @@
 		<div class="col-xs-3 col-xs-offset-3">
 			<%= submit_tag 'Get report', class: 'btn btn-block btn-lg btn-primary' %>
 		</div>
+		<!-- TODO: validate dates -->
 	</div>
 <% end %>
