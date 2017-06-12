@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
              end
     if @response.length > 0
       # TODO: save in database
-      render 'remote_lookup'
+      render 'remote_lookup.js'
     else
       render 'error'
     end

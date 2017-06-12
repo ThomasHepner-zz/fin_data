@@ -1,0 +1,18 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>UF</th>
+			<th>Date</th>
+			<th>CLP Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% response.each do |value| %>
+			<tr>
+				<td></td>
+				<td><%= value['Fecha'] %></td>
+				<td><%= value['Valor'] %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

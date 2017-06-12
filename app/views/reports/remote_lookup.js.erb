@@ -3,6 +3,12 @@ response = JSON.parse('<%= raw @response.to_json %>');
 // Empty container
 
 $('#graph').html('');
+$('#data-table').html('');
+$('#data-stats').html('');
+
+// Render table
+$('#data-table').html("<%= escape_javascript(render partial: 'data_table', locals: { response: @response }) %>")
+$('#data-stats').html("<%= escape_javascript(render partial: 'data_stats') %>")
      
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 600 - margin.left - margin.right,
@@ -71,3 +77,35 @@ svg.append("path")
     .datum(data)
     .attr("class", "line")
     .attr("d", line);
+
+var avg = (function average(array) {
+    var total = 0;
+    array.forEach(function(e) {
+        total += e.value;
+    });
+    return total / array.length;
+})(data);
+
+var max = (function maximum(array) {
+    var max = 0;
+    array.forEach(function(e) {
+        if (e.value > max) {
+            max = e.value;
+        }
+    });
+    return max;
+})(data);
+
+var min = (function minimum(array) {
+    var min = Number.MAX_VALUE;
+    array.forEach(function(e) {
+        if (e.value < min) {
+            min = e.value;
+        }
+    });
+    return min;
+})(data);
+
+$('#avg').html("Promedio: CLP" + avg.toFixed(2));
+$('#max').html("Máximo: CLP" + max);
+$('#min').html("Mínimo: CLP" + min);
