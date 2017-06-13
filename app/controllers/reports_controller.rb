@@ -28,14 +28,14 @@ class ReportsController < ApplicationController
   end
 
   def tmc_lookup
-    # begin
+    begin
       @response = tmc_value_lookup(report_params[:date_from], report_params[:date_to])
       save_report
       @data_type = report_params[:data_type]
       render 'tmc_lookup.js'
-    # rescue => e
-    #   render_error  
-    # end
+    rescue => e
+      render_error  
+    end
   end
 
   private

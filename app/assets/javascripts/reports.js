@@ -12,7 +12,7 @@ var init = function() {
 				date_to = new Date(field_2);
 
 		return date_from < date_to;
-	}, 'The beginning date must be earlier than the ending date of the report');
+	}, 'The start date must be earlier than the ending date of the report');
 
 	$('#reportForm').validate({
 		rules: {

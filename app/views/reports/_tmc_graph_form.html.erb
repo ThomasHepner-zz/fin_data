@@ -1,0 +1,14 @@
+<%= form_tag '#', method: :get, remote: true, id: 'graphForm' do %>
+	<div class="form-group">
+		<div class="col-xs-3">
+			<select name="tmc_type" id="tmc_type" class="form-control" required="required" aria-required="true">
+				<% response.group_by { |v| v['Tipo'] }.each do |k, v| %>
+					<option value="<%= k %>"><%= v[0]['Titulo'] %></option>
+				<% end %>
+			</select>
+		</div>
+		<div class="col-xs-3">
+			<%= submit_tag 'See graph', class: 'btn btn-block btn-primary' %>
+		</div>
+	</div>
+<% end %>
