@@ -11,23 +11,39 @@ class ReportsController < ApplicationController
   	@data_options = [{ type: 'UF', value: 1 }, { type: 'USD', value: 2}]
   end
 
+  # TODO: refactor remote_lookup and tmc_lookup into same action to recycle code
   def remote_lookup
     begin
       @response = if (params[:data_type] == '1')
-                  uf_value_lookup(params[:date_from], params[:date_to])
+                  uf_value_lookup(report_params[:date_from], report_params[:date_to])
                elsif (params[:data_type] == '2')
-                  usd_value_lookup(params[:date_from], params[:date_to])
+                  usd_value_lookup(report_params[:date_from], report_params[:date_to])
                end
       save_report
-      @data_type = params[:data_type]
+      @data_type = report_params[:data_type]
       render 'remote_lookup.js'
     rescue => e
-      @message = 'An error has ocurred: the resource you were looking for is not available. Please try again later.'
-      render 'error.js'
+      render_error
+    end
+  end
+
+  def tmc_lookup
+    begin
+      @response = tmc_value_lookup(report_params[:date_from], report_params[:date_to])
+      save_report
+      @data_type = report_params[:data_type]
+      render 'tmc_lookup.js'
+    rescue => e
+      render_error  
     end
   end
 
   private
+
+  def render_error
+    @message = 'An error has ocurred: the resource you were looking for is not available. Please try again later.'
+    render 'error.js'
+  end
 
   def report_params
   	params.permit(:data_type, :date_from, :date_to)
@@ -46,11 +62,14 @@ class ReportsController < ApplicationController
   end
 
   def save_report
+    # TODO: refactor
     Thread.new do
       if (report_params[:data_type] == '1') 
         data_type = 'UF'
-      else
+      elsif (report_params[:data_type] == '2')
         data_type = 'USD'
+      else
+        data_type = 'TMC'
       end
       Report.create(data_type: data_type,
                     date_from: report_params[:date_from],
