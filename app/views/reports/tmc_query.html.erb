@@ -3,7 +3,7 @@
 	<%= form_tag tmc_lookup_reports_path, method: :get, remote: true, id: 'reportForm' do %>
 		<div class="form-group">
 			<div class="col-xs-4">
-				<%= text_field_tag 'date_from', nil, placeholder: 'Enter beginning date', class: 'form-control', required: true%>
+				<%= text_field_tag 'date_from', nil, placeholder: 'Enter start date', class: 'form-control', required: true%>
 			</div>
 			<div class="col-xs-4">
 				<%= text_field_tag 'date_to', nil, placeholder: 'Enter ending date', class: 'form-control', required: true %>
@@ -18,5 +18,6 @@
 <div class="row" id="data-stats">
 	<div class="col-xs-4 col-xs-offset-4"></div>
 </div>
-<div class="row" id="data-table"></div>
+<div class="row" id="graph-form"></div>
 <div class="row resultsGraph" id="graph"></div>
+<div class="row" id="data-table"></div>

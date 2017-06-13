@@ -3,8 +3,91 @@ response = JSON.parse('<%= raw @response.to_json %>');
 // Empty container
 
 $('#graph').html('');
+$('#graph-form').html('');
 $('#data-table').html('');
 $('#data-stats').html('');
 
+// Render form
+$('#graph-form').html("<%= escape_javascript(render partial: 'tmc_graph_form', locals: { response: @response }) %>");
+
 // Render table
 $('#data-table').html("<%= escape_javascript(render partial: 'tmc_data_table', locals: { response: @response }) %>");
+
+$('#graphForm').on('submit', function(e) {
+	e.preventDefault();
+
+	$('#graph').html('');
+	
+	var selectedOption = $('select[name="tmc_type"').val();
+	var data = response.filter(function(item) { return item.Tipo == selectedOption })
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+	var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+
+	var x = d3.time.scale()
+	    .range([0, width])
+
+	var y = d3.scale.linear()
+	    .range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+	    .scale(x)
+	    .orient("bottom");
+
+	var yAxis = d3.svg.axis()
+	    .scale(y)
+	    .orient("left");
+
+	var line = d3.svg.line()
+	    .x(function(d) { return x(d.date); })
+	    .y(function(d) { return y(d.value); });
+
+	var svg = d3.select("#graph").append("svg")
+	    .attr("width", width + margin.left + margin.right)
+	    .attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	function parseFloatIgnoreCommas(number) {
+	  var numberNoCommas = number.replace('.', '');
+	  var numberNoDots = numberNoCommas.replace(',', '.');
+		return parseFloat(numberNoCommas);
+	};
+
+	var data = response.map(function(d) {
+	    return {
+	       date: parseDate(d.Fecha),
+	       value: parseFloatIgnoreCommas(d.Valor)
+	    };      
+	});
+
+
+	x.domain(d3.extent(data, function(d) { return d.date; }));
+	y.domain(d3.extent(data, function(d) { return d.value; }));
+
+	// TODO: add tooltip for points in plot
+
+	svg.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height + ")")
+	    .call(xAxis);
+
+	svg.append("g")
+	    .attr("class", "y axis")
+	    .call(yAxis)
+	  .append("text")
+	    .attr("transform", "rotate(-90)")
+	    .attr("y", 6)
+	    .attr("dy", ".71em")
+	    .style("text-anchor", "end")
+	    .text("Value (CLP)");
+
+	svg.append("path")
+	    .datum(data)
+	    .attr("class", "line")
+	    .attr("d", line);
+});
