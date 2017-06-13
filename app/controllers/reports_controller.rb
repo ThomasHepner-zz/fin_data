@@ -8,16 +8,17 @@ class ReportsController < ApplicationController
   end
 
   def remote_lookup
-    @response = if (params[:data_type] == '1')
-                uf_value_lookup(params[:date_from], params[:date_to])
-             elsif (params[:data_type] == '2')
-                usd_value_lookup(params[:date_from], params[:date_to])
-             end
-    if @response.length > 0
+    begin
+      @response = if (params[:data_type] == '1')
+                  uf_value_lookup(params[:date_from], params[:date_to])
+               elsif (params[:data_type] == '2')
+                  usd_value_lookup(params[:date_from], params[:date_to])
+               end
       # TODO: save in database
       render 'remote_lookup.js'
-    else
-      render 'error'
+    rescue => e
+      @message = 'An error has ocurred: the resource you were looking for is not available. Please try again later.'
+      render 'error.js'
     end
   end
 

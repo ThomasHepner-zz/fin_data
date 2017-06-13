@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require 'jquery-ui'
-//= require 'jquery-validation'
+//= require 'jquery-validate'
 //= require 'd3'
 //= require rails-ujs
 //= require turbolinks
