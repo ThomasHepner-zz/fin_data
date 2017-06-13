@@ -1,15 +1,15 @@
 <h4>Choose data type and date range:</h4>
 <div class="row">	
-	<%= form_tag reports_remote_lookup_path, method: :get, remote: true do %>
+	<%= form_tag reports_remote_lookup_path, method: :get, remote: true, id: 'reportForm' do %>
 		<div class="form-group">
 			<div class="col-xs-3">
-				<%= select_tag 'data_type', options_for_select(@data_options.collect { |d| [d[:type], d[:value]] }), class: 'form-control' %>
+				<%= select_tag 'data_type', options_for_select(@data_options.collect { |d| [d[:type], d[:value]] }), class: 'form-control', required: true %>
 			</div>
 			<div class="col-xs-3">
-				<%= text_field_tag 'date_from', nil, placeholder: 'Enter beginning date', class: 'form-control' %>
+				<%= text_field_tag 'date_from', nil, placeholder: 'Enter beginning date', class: 'form-control', required: true%>
 			</div>
 			<div class="col-xs-3">
-				<%= text_field_tag 'date_to', nil, placeholder: 'Enter ending date', class: 'form-control' %>
+				<%= text_field_tag 'date_to', nil, placeholder: 'Enter ending date', class: 'form-control', required: true %>
 			</div>
 			<div class="col-xs-3">
 				<%= submit_tag 'Get report', class: 'btn btn-block btn-primary' %>
