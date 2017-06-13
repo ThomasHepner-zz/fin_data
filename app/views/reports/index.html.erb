@@ -1,0 +1,19 @@
+<!-- TODO: make into remote datatable for better pagination -->
+<table class="table">
+	<thead>
+		<tr>
+			<th>Data Type</th>
+			<th>Date</th>
+			<th>CLP Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @reports.each do |report| %>
+			<tr>
+				<td><%= report.data_type %></td>
+				<td><%= report.date_from %></td>
+				<td><%= report.date_to %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

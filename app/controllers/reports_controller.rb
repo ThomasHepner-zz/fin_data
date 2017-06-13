@@ -3,6 +3,10 @@ class ReportsController < ApplicationController
 
 	before_action :report_params, only: [:remote_lookup]
 
+  def index
+    @reports = Report.all
+  end
+
   def new
   	@data_options = [{ type: 'UF', value: 1 }, { type: 'USD', value: 2}]
   end
@@ -14,7 +18,7 @@ class ReportsController < ApplicationController
                elsif (params[:data_type] == '2')
                   usd_value_lookup(params[:date_from], params[:date_to])
                end
-      # TODO: save in database
+      save_report
       render 'remote_lookup.js'
     rescue => e
       @message = 'An error has ocurred: the resource you were looking for is not available. Please try again later.'
@@ -38,5 +42,19 @@ class ReportsController < ApplicationController
     uri = usd_uri(date_from, date_to)
     result = HTTParty.get(uri)
     result.parsed_response['Dolares']
+  end
+
+  def save_report
+    Thread.new do
+      if (report_params[:data_type] == '1') 
+        data_type = 'UF'
+      else
+        data_type = 'USD'
+      end
+      Report.create(data_type: data_type,
+                    date_from: report_params[:date_from],
+                    date_to: report_params[:date_to])
+      ActiveRecord::Base.connection.close
+    end
   end
 end
