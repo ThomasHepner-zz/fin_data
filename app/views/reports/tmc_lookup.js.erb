@@ -1,0 +1,10 @@
+response = JSON.parse('<%= raw @response.to_json %>');
+
+// Empty container
+
+$('#graph').html('');
+$('#data-table').html('');
+$('#data-stats').html('');
+
+// Render table
+$('#data-table').html("<%= escape_javascript(render partial: 'tmc_data_table', locals: { response: @response }) %>");

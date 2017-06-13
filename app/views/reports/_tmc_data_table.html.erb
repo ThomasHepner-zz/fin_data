@@ -1,0 +1,23 @@
+<!-- TODO: make remote datatable for better pagination -->
+<table class="table">
+	<thead>
+		<tr>
+			<th>Type</th>
+			<th>Title</th>
+			<th>CLP Value</th>
+			<th>Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% response.group_by { |v| v['Tipo'] }.each do |k, v| %>
+			<% v.each do |value| %>
+				<tr>
+					<td><%= value['Tipo'] %></td>
+					<td><%= value['Titulo'] %></td>
+					<td><%= value['Valor'] %></td>
+					<td><%= value['Fecha'] %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>

@@ -16,7 +16,17 @@ module ReportsHelper
 		date_from = date_from.split('/')
 		date_to = date_to.split('/')
 		uri = build_sbif_uri('dolar')
-		uri << "/#{date_from[2]}/#{date_from[0]}/#{date_from[1]}/#{date_to[2]}/#{date_to[0]}/#{date_to[1]}"
+		uri << "/#{date_from[2]}/#{date_from[0]}/#{date_to[2]}/#{date_to[0]}"
+		uri << format_and_key
+		uri
+	end
+
+	# Ex: http://api.sbif.cl/api-sbifv3/recursos_api/tmc/periodo/2010/01/2011/01?apikey=4f5dd540572b10aecc876201bfd56746a5879a97&formato=json
+	def tmc_uri(date_from, date_to)
+		date_from = date_from.split('/')
+		date_to = date_to.split('/')
+		uri = build_sbif_uri('tmc')
+		uri << "/#{date_from[2]}/#{date_from[0]}/#{date_to[2]}/#{date_to[0]}"
 		uri << format_and_key
 		uri
 	end

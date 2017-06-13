@@ -28,14 +28,14 @@ class ReportsController < ApplicationController
   end
 
   def tmc_lookup
-    begin
+    # begin
       @response = tmc_value_lookup(report_params[:date_from], report_params[:date_to])
       save_report
       @data_type = report_params[:data_type]
       render 'tmc_lookup.js'
-    rescue => e
-      render_error  
-    end
+    # rescue => e
+    #   render_error  
+    # end
   end
 
   private
@@ -59,6 +59,12 @@ class ReportsController < ApplicationController
     uri = usd_uri(date_from, date_to)
     result = HTTParty.get(uri)
     result.parsed_response['Dolares']
+  end
+
+  def tmc_value_lookup(date_from, date_to)
+    uri = tmc_uri(date_from, date_to)
+    result = HTTParty.get(uri)
+    result.parsed_response['TMCs']
   end
 
   def save_report
