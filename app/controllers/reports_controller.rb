@@ -19,6 +19,7 @@ class ReportsController < ApplicationController
                   usd_value_lookup(params[:date_from], params[:date_to])
                end
       save_report
+      @data_type = params[:data_type]
       render 'remote_lookup.js'
     rescue => e
       @message = 'An error has ocurred: the resource you were looking for is not available. Please try again later.'

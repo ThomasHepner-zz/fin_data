@@ -1,8 +1,14 @@
+<% type = if data_type == '1'
+						'UF'
+					else
+						'USD'
+					end
+%>
+<!-- TODO: make remote datatable for better pagination -->
 <table class="table">
 	<thead>
 		<tr>
-			<!-- TODO: change when it's USD -->
-			<th>UF</th>
+			<th><%= type %></th>
 			<th>Date</th>
 			<th>CLP Value</th>
 		</tr>
