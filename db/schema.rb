@@ -10,18 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611002007) do
+ActiveRecord::Schema.define(version: 20170613190010) do
 
-  create_table "uf_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.decimal "clp_value", precision: 8, scale: 2
-    t.date "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "usd_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.decimal "clp_value", precision: 8, scale: 2
-    t.date "date"
+  create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "data_type"
+    t.date "date_from"
+    t.date "date_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

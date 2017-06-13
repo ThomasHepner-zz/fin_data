@@ -1,2 +1,0 @@
-class UfValue < ApplicationRecord
-end

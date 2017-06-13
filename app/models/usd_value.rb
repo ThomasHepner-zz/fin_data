@@ -1,2 +1,0 @@
-class UsdValue < ApplicationRecord
-end

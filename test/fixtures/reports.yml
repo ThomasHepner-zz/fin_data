@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data_type: MyString
+  date_from: 2017-06-13
+  date_to: 2017-06-13
+
+two:
+  data_type: MyString
+  date_from: 2017-06-13
+  date_to: 2017-06-13
