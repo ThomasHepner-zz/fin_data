@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: fin_data_production
-  username: fin_data
-  password: <%= ENV['FIN_DATA_DATABASE_PASSWORD'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
