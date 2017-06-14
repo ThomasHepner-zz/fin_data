@@ -1,0 +1,11 @@
+{
+  "name": "dsl-generated-dependencies",
+  "dependencies": {
+    "bootstrap-sass": "latest",
+    "jquery": "latest",
+    "flat-ui": "latest",
+    "jquery-ui": "latest",
+    "jquery-validate": "latest",
+    "d3": "3.5.17"
+  }
+}
